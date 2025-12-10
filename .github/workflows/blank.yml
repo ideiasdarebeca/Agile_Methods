@@ -1,35 +1,38 @@
-# Este é um fluxo de trabalho básico para ajudar você a começar com ações
-nome: CI
+nome: CI - Integração Contínua
 
-# Controla quando o fluxo de trabalho será executado
-sobre:
- # Aciona o fluxo de trabalho em eventos de solicitação push ou pull, mas apenas para o branch "principal"
- empurrar:
-   ramos: [ "principal" ]
- solicitação de pull:
-   ramos: [ "principal" ]
+# Controla quando o fluxo de trabalho será executado (Gatilhos)
+on:
+  # Aciona o fluxo de trabalho quando há um push para o branch principal
+  push:
+    branches: [ "principal" ]
+  
+  # Aciona o fluxo de trabalho quando há um Pull Request (PR) para o branch principal
+  pull_request:
+    branches: [ "principal" ]
 
- # Permite que você execute este fluxo de trabalho manualmente na guia Ações
- fluxo_de_trabalho_despacho:
+  # Permite que você execute este fluxo de trabalho manualmente na aba "Actions"
+  workflow_dispatch:
 
-# Uma execução de fluxo de trabalho é composta de um ou mais trabalhos que podem ser executados sequencialmente ou em paralelo
-empregos:
- # Este fluxo de trabalho contém um único trabalho chamado "build"
- construir:
-   # O tipo de executor no qual o trabalho será executado
-   executa em: ubuntu-latest
+# Uma execução de fluxo de trabalho é composta de um ou mais trabalhos
+jobs:
+  # Este trabalho contém os passos de build/teste
+  build:
+    # O tipo de executor no qual o trabalho será executado
+    runs-on: ubuntu-latest # Usando a palavra-chave runs-on (idioma preferido pelo GitHub)
 
-   # As etapas representam uma sequência de tarefas que serão executadas como parte do trabalho
-   passos:
-     # Faz check-out do seu repositório em $GITHUB_WORKSPACE, para que seu trabalho possa acessá-lo
-     - usos: ações/checkout@v3
+    # As etapas representam uma sequência de tarefas
+    steps:
+      # Etapa 1: Faz check-out do seu repositório para que o job possa acessar os arquivos
+      - uses: actions/checkout@v3
 
-     # Executa um único comando usando o shell do runner
-     - nome: Executa um script de uma linha
-       executar: echo Olá, mundo!
+      # Etapa 2: Executa um script de uma linha
+      - name: Executa script de uma linha
+        run: echo Fluxo de trabalho inicial executado com sucesso!
 
-     # Executa um conjunto de comandos usando o shell do runner
-     - nome: Executa um script multi-linha
-       correr: |
-         echo Adicionar outras ações para construir,
-         teste de eco e implante seu projeto.
+      # Etapa 3: Executa um script multi-linha
+      - name: Mensagem de Conclusão (Próximos Passos)
+        run: |
+          echo Adicione aqui as ações para
+          echo - Instalar Dependências
+          echo - Compilar seu Código
+          echo - Executar Testes Unitários
