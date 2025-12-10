@@ -1,0 +1,39 @@
+# A chave para o nome do fluxo de trabalho deve ser 'name'
+name: CI - Integração Contínua
+
+# A chave para os gatilhos deve ser 'on'
+on:
+  # Gatilho push (Empurrar)
+  push:
+    branches: [ "main", "principal" ] # Adicionado 'main' para compatibilidade
+  
+  # Gatilho pull request (Solicitação de pull)
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [ "main", "principal" ]
+
+  # Gatilho workflow_dispatch (Permite execução manual)
+  workflow_dispatch:
+
+# A chave para os trabalhos deve ser 'jobs'
+jobs:
+  # Nome/ID do trabalho deve ser 'build' ou 'ci'
+  ci:
+    # A chave para o ambiente de execução deve ser 'runs-on'
+    runs-on: ubuntu-latest
+
+    # A chave para as etapas deve ser 'steps'
+    steps:
+      # 1. Faz checkout do código
+      - name: Checkout do Repositório
+        uses: actions/checkout@v3
+
+      # 2. Executa um comando simples
+      - name: Executar script de uma linha
+        run: echo "O fluxo de trabalho CI foi executado com sucesso!"
+
+      # 3. Executa comandos em múltiplas linhas
+      - name: Próximos Passos
+        run: |
+          echo "Este é o ponto de partida."
+          echo "Adicione aqui as ações de build e teste."
