@@ -1,4 +1,4 @@
-nome: CI
+name: CI
 
 # Controla quando o fluxo de trabalho será executado (Gatilhos)
 on:
@@ -6,7 +6,7 @@ on:
     branches: [ "principal" ]
   
   pull_request:
-    branches: [ "principal" ]
+    types: [opened, synchronize, reopened] # Mais robusto que apenas branches
 
   workflow_dispatch:
 
@@ -16,17 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Etapa 1: Faz check-out do seu repositório para que o job possa acessar os arquivos
+      # Faz check-out do seu repositório
       - uses: actions/checkout@v3
 
-      # Etapa 2: Executa um script de uma linha
+      # Executa um script de uma linha
       - name: Executa script de uma linha
         run: echo Fluxo de trabalho inicial executado com sucesso!
 
-      # Etapa 3: Executa um script multi-linha
-      - name: Mensagem de Conclusão (Próximos Passos)
+      # Executa um script multi-linha
+      - name: Mensagem de Conclusão
         run: |
-          echo Adicione aqui as ações para
-          echo - Instalar Dependências
-          echo - Compilar seu Código
-          echo - Executar Testes Unitários
+          echo Fluxo de trabalho testado e funcionando.
