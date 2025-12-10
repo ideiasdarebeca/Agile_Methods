@@ -1,4 +1,4 @@
-nome: CI - Integração Contínua
+ nome : CI
 
 # Controla quando o fluxo de trabalho será executado (Gatilhos)
 on:
