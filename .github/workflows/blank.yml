@@ -1,26 +1,20 @@
-nome : CI
+nome: CI
 
 # Controla quando o fluxo de trabalho será executado (Gatilhos)
 on:
-  # Aciona o fluxo de trabalho quando há um push para o branch principal
   push:
     branches: [ "principal" ]
   
-  # Aciona o fluxo de trabalho quando há um Pull Request (PR) para o branch principal
   pull_request:
     branches: [ "principal" ]
 
-  # Permite que você execute este fluxo de trabalho manualmente na aba "Actions"
   workflow_dispatch:
 
 # Uma execução de fluxo de trabalho é composta de um ou mais trabalhos
 jobs:
-  # Este trabalho contém os passos de build/teste
   build:
-    # O tipo de executor no qual o trabalho será executado
-    runs-on: ubuntu-latest # Usando a palavra-chave runs-on (idioma preferido pelo GitHub)
+    runs-on: ubuntu-latest
 
-    # As etapas representam uma sequência de tarefas
     steps:
       # Etapa 1: Faz check-out do seu repositório para que o job possa acessar os arquivos
       - uses: actions/checkout@v3
