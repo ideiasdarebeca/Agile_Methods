@@ -1,0 +1,39 @@
+name: CI - Fluxo de Trabalho Básico
+
+# Define os gatilhos para a execução
+on:
+  # Executa quando há um push para o branch principal
+  push:
+    branches: [ "principal" ]
+  
+  # Executa quando um Pull Request é aberto, sincronizado ou reaberto no branch principal
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [ "principal" ]
+
+  # Permite que o fluxo de trabalho seja acionado manualmente
+  workflow_dispatch:
+
+# Define os trabalhos (jobs) que serão executados
+jobs:
+  build:
+    # O trabalho será executado no sistema operacional Ubuntu mais recente
+    runs-on: ubuntu-latest
+
+    # Os passos (steps) que serão executados sequencialmente
+    steps:
+      # Passo 1: Faz o checkout do código do repositório
+      - name: Checkout do Repositório
+        uses: actions/checkout@v3
+
+      # Passo 2: Exemplo de comando simples no shell
+      - name: Executa um comando simples
+        run: echo "Início da Integração Contínua (CI)."
+
+      # Passo 3: Exemplo de script de múltiplas linhas
+      - name: Próximos Passos Recomendados
+        run: |
+          echo "Este é o ponto de partida. Agora você pode adicionar:"
+          echo "1. Configuração do ambiente (Node.js, Python, etc.)"
+          echo "2. Instalação de dependências"
+          echo "3. Etapas de build e testes"
